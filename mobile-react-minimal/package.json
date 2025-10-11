@@ -1,0 +1,33 @@
+{
+  "name": "mobile-react-minimal",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "clean": "ROOT=$(git rev-parse --show-toplevel); watchman watch-del $ROOT; watchman watch-project $ROOT",
+    "build:worklet": "./scripts/build-worklet.sh",
+    "build:worklet:watch": "nodemon --watch worklet --ext js,cjs --exec npm run build:worklet",
+    "start": "npm run build:worklet && expo start -d",
+    "ios": "expo run:ios",
+    "android": "expo run:android",
+    "dev:ios": "concurrently --kill-others npm:build:worklet:watch npm:ios",
+    "dev:android": "concurrently --kill-others npm:build:worklet:watch npm:android"
+  },
+  "dependencies": {
+    "b4a": "^1.7.3",
+    "events": "^3.3.0",
+    "expo": "^54.0.10",
+    "expo-build-properties": "^1.0.9",
+    "react": "19.1.1",
+    "react-native": "~0.81.4",
+    "react-native-b4a": "^0.0.4",
+    "react-native-bare-kit": "^0.9.3"
+  },
+  "devDependencies": {
+    "@types/b4a": "^1.6.5",
+    "@types/react": "^19.1.15",
+    "@types/streamx": "^2.9.5",
+    "bare-pack": "^1.4.6",
+    "concurrently": "^9.2.1",
+    "nodemon": "^3.1.10"
+  }
+}
