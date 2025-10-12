@@ -17,7 +17,7 @@
     "events": "^3.3.0",
     "expo": "^54.0.10",
     "expo-build-properties": "^1.0.9",
-    "react": "19.1.1",
+    "react": "19.1.0",
     "react-native": "~0.81.4",
     "react-native-b4a": "^0.0.4",
     "react-native-bare-kit": "^0.9.3"
