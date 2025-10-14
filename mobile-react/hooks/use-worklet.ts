@@ -24,8 +24,10 @@ const useWorklet = () => {
         const obj = JSON.parse(msg)
         if (obj.tag === 'pong') {
           setPingRes(obj.data)
+          setError('')
         } else if (obj.tag === 'res-fs') {
           setFsRes(obj.data)
+          setError('')
         } else if (obj.tag === 'error') {
           setError(obj.data)
         }
