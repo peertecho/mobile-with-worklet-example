@@ -9,7 +9,7 @@ import { ThemedView } from '@/components/themed-view'
 import useWorklet from '@/hooks/use-worklet'
 
 export default function HomeScreen () {
-  const { pingRes, fsRes } = useWorklet()
+  const { pingRes, fsRes, error } = useWorklet()
 
   return (
     <ParallaxScrollView
@@ -72,6 +72,7 @@ export default function HomeScreen () {
         <ThemedText type='subtitle'>Step 3: Test Worklet</ThemedText>
         <ThemedText>{`Ping Pong: ${pingRes}`}</ThemedText>
         <ThemedText>{`Test FS: ${fsRes}`}</ThemedText>
+        <ThemedText>{`Error: ${error}`}</ThemedText>
       </ThemedView>
     </ParallaxScrollView>
   )

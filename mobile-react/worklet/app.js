@@ -24,8 +24,12 @@ function write (tag, data) {
 }
 
 async function testFs (dir) {
-  const file = path.join(dir, 'hello.txt')
-  await fs.promises.writeFile(file, 'Hello from Worklet!', 'utf8')
-  const res = await fs.promises.readFile(file, 'utf8')
-  return res
+  try {
+    const file = path.join(dir, 'hello.txt')
+    await fs.promises.writeFile(file, 'Hello from Worklet!', 'utf8')
+    const res = await fs.promises.readFile(file, 'utf8')
+    return res
+  } catch (err) {
+    write('error', `${err?.stack || err}`)
+  }
 }

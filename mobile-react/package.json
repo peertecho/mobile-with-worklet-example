@@ -21,7 +21,6 @@
     "b4a": "^1.7.3",
     "bare-fs": "^4.4.5",
     "bare-path": "^3.0.0",
-    "bare-process": "^4.2.1",
     "events": "^3.3.0",
     "expo": "^54.0.10",
     "expo-build-properties": "^1.0.9",
@@ -71,10 +70,6 @@
     "path": {
       "bare": "bare-path",
       "default": "path"
-    },
-    "process": {
-      "bare": "bare-process",
-      "default": "process"
     }
   }
 }

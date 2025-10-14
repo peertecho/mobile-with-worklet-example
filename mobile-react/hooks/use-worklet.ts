@@ -12,6 +12,7 @@ const { IPC } = worklet
 const useWorklet = () => {
   const [pingRes, setPingRes] = useState('')
   const [fsRes, setFsRes] = useState('')
+  const [error, setError] = useState('')
 
   useEffect(() => {
     IPC.on('data', (data) => {
@@ -25,6 +26,8 @@ const useWorklet = () => {
           setPingRes(obj.data)
         } else if (obj.tag === 'res-fs') {
           setFsRes(obj.data)
+        } else if (obj.tag === 'error') {
+          setError(obj.data)
         }
       }
     })
@@ -38,7 +41,7 @@ const useWorklet = () => {
     }
   }, [])
 
-  return { pingRes, fsRes }
+  return { pingRes, fsRes, error }
 }
 
 function write (tag: string, data?: any) {
