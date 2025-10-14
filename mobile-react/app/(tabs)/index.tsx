@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { Image } from 'expo-image'
 import { Platform, StyleSheet } from 'react-native'
 import { Link } from 'expo-router'
@@ -10,14 +9,7 @@ import { ThemedView } from '@/components/themed-view'
 import useWorklet from '@/hooks/use-worklet'
 
 export default function HomeScreen () {
-  const { error, healthCheck, write } = useWorklet()
-
-  useEffect(() => {
-    const interval = setInterval(() => write({ event: 'ping' }), 2000)
-    return () => {
-      clearInterval(interval)
-    }
-  }, [])
+  const { pingRes, fsRes } = useWorklet()
 
   return (
     <ParallaxScrollView
@@ -78,8 +70,8 @@ export default function HomeScreen () {
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
         <ThemedText type='subtitle'>Step 3: Test Worklet</ThemedText>
-        <ThemedText>{`HealthCheck: ${healthCheck}`}</ThemedText>
-        <ThemedText>{`Error: ${error}`}</ThemedText>
+        <ThemedText>{`Ping Pong: ${pingRes}`}</ThemedText>
+        <ThemedText>{`Test FS: ${fsRes}`}</ThemedText>
       </ThemedView>
     </ParallaxScrollView>
   )

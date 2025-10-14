@@ -10,57 +10,39 @@ worklet.start('/app.bundle', bundle)
 const { IPC } = worklet
 
 const useWorklet = () => {
-  const [error, setError] = useState('')
-  const [healthCheck, setHealthCheck] = useState('')
+  const [pingRes, setPingRes] = useState('')
+  const [fsRes, setFsRes] = useState('')
 
   useEffect(() => {
-    IPC.on('data', (data: Uint8Array) => {
+    IPC.on('data', (data) => {
       const lines = b4a.toString(data).split('\n')
       for (let msg of lines) {
         msg = msg.trim()
         if (!msg) continue
-        const obj = parseMsg(msg)
 
-        if (obj.tag === 'error') {
-          console.log('Error from worklet:', obj.data)
-          setError(msg)
-        } else if (obj.tag === 'data') {
-          onData(obj.data, obj)
-        } else {
-          console.log('Unknown message from worklet:', msg)
+        const obj = JSON.parse(msg)
+        if (obj.tag === 'pong') {
+          setPingRes(obj.data)
+        } else if (obj.tag === 'res-fs') {
+          setFsRes(obj.data)
         }
       }
     })
-    write('ready', { 
-      documentDirectory: Paths.document.uri.substring('file://'.length)
-    })
+
+    write('test-fs', Paths.document.uri.substring('file://'.length))
+
+    const interval = setInterval(() => write('ping'), 1000)
+    return () => {
+      clearInterval(interval)
+      IPC.end()
+    }
   }, [])
 
-  function onData (data: any, obj: any) {
-    if (data?.event === 'pong') {
-      setHealthCheck(JSON.stringify({ data, at: obj.at }))
-    } else {
-      console.log('Data from worklet:', data)
-    }
-  }
-
-  return { 
-    error, 
-    healthCheck,
-    write: (data: any) => write('data', data)
-  }
+  return { pingRes, fsRes }
 }
 
 function write (tag: string, data?: any) {
-  IPC.write(b4a.from(JSON.stringify({ tag, data, at: new Date().toISOString() }) + '\n'))
-}
-
-function parseMsg (msg: string) {
-  try {
-    return JSON.parse(msg)
-  } catch {
-    return { tag: 'unknown', data: msg }
-  }
+  IPC.write(b4a.from(JSON.stringify({ tag, data }) + '\n'))
 }
 
 export default useWorklet
