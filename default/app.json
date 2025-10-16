@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "mobile-react",
-    "slug": "mobile-react",
+    "name": "default",
+    "slug": "default",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -10,7 +10,7 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.mobile-react"
+      "bundleIdentifier": "com.anonymous.default"
     },
     "android": {
       "adaptiveIcon": {
@@ -21,7 +21,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.anonymous.mobilereact"
+      "package": "com.anonymous.default"
     },
     "plugins": [
       "expo-router",

@@ -5,7 +5,7 @@
 ## Usage
 Minimal app
 ```shell
-cd mobile-react-minimal
+cd minimal
 npm i
 npm run dev:ios
 npm run dev:android
@@ -13,7 +13,7 @@ npm run dev:android
 
 Default app from `npx create-expo-app@latest`
 ```shell
-cd mobile-react
+cd default
 npm i
 npm run dev:ios
 npm run dev:android
